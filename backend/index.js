@@ -6,6 +6,7 @@ global.foodData = require('./db')(function call(err, data, CatData) {
   })
   
   const express = require('express')
+  const cors = require('cors')
   const app = express()
   const port = 5000
   app.use((req, res, next) => {
@@ -16,6 +17,13 @@ global.foodData = require('./db')(function call(err, data, CatData) {
     );
     next();
   });
+ app.use(cors(
+     {
+         origin : ["https://deploy-mern-1whq.vercel.app"],
+         methods : ["POST" , "GET"],
+         credentials : true
+     }
+ ));
   app.use(express.json())
   
   app.get('/', (req, res) => {
